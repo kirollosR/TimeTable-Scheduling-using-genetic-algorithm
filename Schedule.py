@@ -5,7 +5,7 @@ class Schedule:
     def __init__(self, data):
         self.data = data
         self.classes = []
-        self.numOfConflicts = 0
+        self.numberOfConflicts = 0
         self.fitness = -1
         self.classNumb = 0
         self.isFitnesschanged = True  # ********
@@ -31,8 +31,24 @@ class Schedule:
     def decoding(self):
         pass
 
+    def getClasses(self):
+        self.isFitnesschanged = True
+        return self.classes
+
+    def getNumberOfConflicts(self):
+        return self.numberOfConflicts
+
     def calculateFitness(self):
         self.numOfConflicts = 0
+        classes = self.getClasses()
+        for i in range(0, len(classes)):
+            if(classes[i].getHall().getCapacity() < classes[i].getCourse().getNumberOfStudents()):
+                self.numberOfConflicts += 5 # 5 points for the students over the capacity of the hall
+
+            for j in range(0, len(classes)):
+                if(classes[i].getHall().getId() == classes[j].getHall().getId() and i != j):
+                    if(classes[i].getTimeAvilable().getId() == classes[j].getTimeAvilable().getId()):
+                        self.numberOfConflicts += 1
 
     def averageFitness(self):
         pass
