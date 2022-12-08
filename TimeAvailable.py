@@ -13,3 +13,6 @@ class TimeAvailable:
 
     def getDay(self):
         return self.day
+
+    def getTimeAvailable(self):
+        return self.day + " " + self.time
