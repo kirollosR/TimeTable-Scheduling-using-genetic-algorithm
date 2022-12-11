@@ -15,17 +15,18 @@ class Schedule:
         depts = self.data.getDepts()
 
         for i in range(0, len(depts)):
-            courses = depts[i].get_courses()
+            courses = depts[i].getCourses()
 
             for j in range(0, len(courses)):
                 newClass = Class(self.classNumb, depts[i], courses[j])
                 self.classNumb += 1
                 newClass.setTimeAvilable(
                     self.data.getTimeAvailable()[randint(0, len(self.data.getTimeAvailable()) - 1)])
-                newClass.setHall(self.data.getHall()[randint(0, len(self.data.getHall()) - 1)])
+                newClass.setHall(self.data.getHalls()[randint(0, len(self.data.getHalls()) - 1)])
                 newClass.setLecturer(
                     courses[j].getLecturer()[randint(0, len(courses[j].getLecturer()) - 1)])
                 self.classes.append(newClass)
+        return self
 
     def encoding(self):
         pass
@@ -47,14 +48,14 @@ class Schedule:
         for i in range(0, len(classes)):
             timeIds.append(classes[i].getTimeAvilable().getId())
             # capacity of hall < number of students
-            if classes[i].getHall().getCapacity() < classes[i].getCourse().getNumberOfStudents():
+            if classes[i].getHall().getCapacity() < classes[i].getCourse().getMaxNumberOfStudents():
                 self.numberOfConflicts += 5  # 5 points for the students over the capacity of the hall
 
             # TODO: number of days the dr will teach per week
 
             for j in range(i, len(classes)):
                 # 2 classes in the same department
-                if classes[i].getDept().getId() == classes[j].getDept().getId():
+                if classes[i].getDept().getName() == classes[j].getDept().getName():
                     self.numberOfConflicts += 1
                     # 2 classes at the same time
                     if classes[i].getTimeAvilable().getId() == classes[j].getTimeAvilable().getId() and i != j:
@@ -91,8 +92,8 @@ class Schedule:
         pass
 
     def __str__(self):
-        pharse = ""
+        phrase = ""
         for i in range(0, len(self.classes)):
-            pharse += str(self.classes[i]) + ","
+            phrase += str(self.classes[i]) + ","
 
-        return pharse
+        return phrase

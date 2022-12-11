@@ -7,7 +7,7 @@ class Population:
         self.data = data
         self.schedules = []
         for i in range(0, size):
-            self.schedules.append(Schedule().individual())
+            self.schedules.append(Schedule(self.data).individual())
 
     def getSchedules(self):
         return self.schedules

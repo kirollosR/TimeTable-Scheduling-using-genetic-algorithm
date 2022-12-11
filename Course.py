@@ -18,3 +18,5 @@ class Course:
 
     def getMaxNumberOfStudents(self):
         return self.maxNumberOfStudents
+
+    def __str__(self): return self.name

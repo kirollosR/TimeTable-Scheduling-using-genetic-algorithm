@@ -1,24 +1,20 @@
-from Lecturer import Lecturer
+from Data import Data
+from Display import Display
+from Population import Population
 
-class Time:
-    def __init__(self,id, day, time):
-        self.id = id
-        self.time = time #array of times at that day
-        self.day = day
+POPULATION_SIZE = 10
 
-    def getId(self):
-        return self.id
 
-    def getTime(self):
-        return self.time
+data = Data()
+display = Display()
 
-    def getDay(self):
-        return self.day
+generationNumber = 0
+print("\n> Generation # " + str(generationNumber))
 
-t = [["t1","monday",["10-12","12-2"]],
-     ["t2","tuesday",["10-12","12-2"]]]
-# time = Time("t1","monday",["10-12","12-2"])
-time = []
-for i in range(0, len(t)):
-    time.append(Time(t[0][0], t[0][1], t[0][2]))
-print(time[0].getTime())
+population = Population(POPULATION_SIZE, data)
+
+def get_sort_key(list):
+    return list.getFitness()
+
+population.getSchedules().sort(key=get_sort_key, reverse=True)
+display.print_generation(population)

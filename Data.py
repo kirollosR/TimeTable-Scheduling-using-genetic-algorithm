@@ -67,7 +67,7 @@ class Data:
             #condition if the course in other department and already added don't add it again
             self.numberOfClasses += len(self.depts[i].getCourses())
 
-    def getRooms(self):
+    def getHalls(self):
         return self.halls
 
     def getLecturers(self):
