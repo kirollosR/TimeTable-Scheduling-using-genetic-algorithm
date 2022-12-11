@@ -2,8 +2,8 @@
 2- order this generation by fitness
 3- choose the best 20% of the generation
 4- choose random chromosomes from the rest
-5- mutate the generation
-6- crossover the generation to create new generation
+5- crossover the generation to create new generation
+6- mutate the generation
 7- calculate the fitness
 8- loop all the steps again
 
@@ -11,7 +11,7 @@ FUNCTIONS:
 encoding - decoding
 individual
 fitness function - average fitness function
-mutation function
 crossover function
-Display class OR gui
+mutation function
+Display class
 Main
