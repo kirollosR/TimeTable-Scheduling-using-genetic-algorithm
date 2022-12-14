@@ -10,7 +10,7 @@ class Course:
     def getId(self):
         return self.id
 
-    def GetCourseName(self):
+    def getName(self):
         return self.name
 
     def getLecturer(self):

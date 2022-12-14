@@ -88,8 +88,6 @@ class Schedule:
             self.fitness = self.calculateFitness()
             self.isFitnesschanged = False
         return self.fitness
-    def averageFitness(self):
-        pass
 
     def __str__(self):
         phrase = ""

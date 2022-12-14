@@ -72,13 +72,13 @@ class Display:
 
     # TODO : change the display of time available
     def print_schedule_as_table(self, schedule):
-        classes = schedule.get_classes()
+        classes = schedule.getClasses()
         table = prettytable.PrettyTable(
             ['Class #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor','TimeAvilable'])
         for i in range(0, len(classes)):
-            table.add_row([str(i), classes[i].get_dept().get_name(), classes[i].get_course().get_name() + " (" +
-                           classes[i].get_course().get_number() + ", " + str(classes[i].get_course().get_maxNumbOfStudents()) + ")",
-                           classes[i].get_room().get_number() + " (" + str(classes[i].get_room().get_seatingCapacity())+")",
-                           classes[i].get_instructor().get_name() + " (" + str(classes[i].get_instructor().get_id()) + ")",
-                           classes[i].get_TimeAvilable().get_time() + " (" + str(classes[i].get_TimeAvilable().get_id()) + ")"])
+            table.add_row([str(i), classes[i].getDept().getName(), classes[i].getCourse().getName() + " (" +
+                           classes[i].getCourse().getId() + ", " + str(classes[i].getCourse().getMaxNumberOfStudents()) + ")",
+                           classes[i].getHall().getId() + " (" + str(classes[i].getHall().getCapacity())+")",
+                           classes[i].getLecturer().getName() + " (" + str(classes[i].getLecturer().getId()) + ")",
+                           classes[i].getTimeAvilable().getTimeAvailable() + " (" + str(classes[i].getTimeAvilable().getId()) + ")"])
         print(table)

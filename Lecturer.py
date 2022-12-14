@@ -6,5 +6,5 @@ class Lecturer:
     def getId(self):
         return self.id
 
-    def getLecturerName(self):
+    def getName(self):
         return self.name
