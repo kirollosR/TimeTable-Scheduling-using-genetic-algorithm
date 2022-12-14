@@ -24,3 +24,6 @@ display.print_generation(population)
 
 print("\n\n")
 display.print_schedule_as_table(population.getSchedules()[0])
+
+print("\n> CS department Schedule:")
+display.printOurUsualSchedule(population.getSchedules()[0], "CS")

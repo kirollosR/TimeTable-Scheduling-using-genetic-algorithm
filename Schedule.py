@@ -75,6 +75,7 @@ class Schedule:
                         self.numberOfConflicts += 5
 
         # number of gaps of the day
+        #TODO: We have a problem that this function calculate number of gaps of all depts
         sortedTimeIds = sorted(timeIds)
         for i in range(0, len(sortedTimeIds)):
             for j in range(i, 3):
