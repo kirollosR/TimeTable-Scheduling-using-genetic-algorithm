@@ -43,10 +43,16 @@ class Schedule:
 
     def calculateFitness(self):
         self.numberOfConflicts = 0
-        timeIds = []
+        # timeIds = []
+        # timeIds = {"CS": [], "IS": [], "General": [], "IT": []}
+        timeIds = {}
+        departments = self.data.getDepts()
+        for i in range(0, len(departments)):
+            timeIds[departments[i].getName()] = []
         classes = self.getClasses()
         for i in range(0, len(classes)):
-            timeIds.append(classes[i].getTimeAvilable().getId())
+            # timeIds.append(classes[i].getTimeAvilable().getId())
+            timeIds[classes[i].getDept().getName()] += [int(classes[i].getTimeAvilable().getId())]
             # capacity of hall < number of students
             if classes[i].getHall().getCapacity() < classes[i].getCourse().getMaxNumberOfStudents():
                 self.numberOfConflicts += 5  # 5 points for the students over the capacity of the hall
@@ -75,15 +81,25 @@ class Schedule:
                         self.numberOfConflicts += 5
 
         # number of gaps of the day
-        #TODO: We have a problem that this function calculate number of gaps of all depts
-        sortedTimeIds = sorted(timeIds)
-        for i in range(0, len(sortedTimeIds)):
-            for j in range(i, 3):
-                gaps = int(sortedTimeIds[i+1]) - int(sortedTimeIds[i])
-                if 2 <= gaps <= 4:
-                    self.numberOfConflicts += gaps - 1
-                    break
+        # TODO: We have a problem that this function calculate number of gaps of all depts
+        # sortedTimeIds = sorted(timeIds)
+        # for i in range(0, len(sortedTimeIds)):
+        #     for j in range(i, 3):
+        #         gaps = int(sortedTimeIds[i+1]) - int(sortedTimeIds[i])
+        #         if 2 <= gaps <= 4:
+        #             self.numberOfConflicts += gaps - 1
+        #             break
+
+        for i in timeIds.keys():
+            sortedTimeIds = sorted(timeIds[i])
+            for j in range(0, len(sortedTimeIds)):
+                for k in range(j, 3):
+                    gaps = int(sortedTimeIds[j]) - int(sortedTimeIds[j - 1])
+                    if 2 <= gaps <= 4:
+                        self.numberOfConflicts += gaps - 1
+                        break
         return 1 / ((1.0 * self.numberOfConflicts) + 1)
+
     def getFitness(self):
         if self.isFitnesschanged:
             self.fitness = self.calculateFitness()

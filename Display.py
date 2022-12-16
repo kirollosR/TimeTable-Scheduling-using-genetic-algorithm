@@ -12,62 +12,65 @@ from TimeAvailable import TimeAvailable
 
 
 class Display:
-    def print_available_data(self):
+    def print_available_data(self, data):
         print("> ALL Available Data")
-        self.print_dept()
-        self.print_course()
-        self.print_halls()
-        self.print_instructor()
-        self.print_Time_Avilable()
+        self.print_dept(data)
+        self.print_course(data)
+        self.print_halls(data)
+        self.print_instructor(data)
+        self.print_Time_Avilable(data)
 
-    def print_dept(self):
-        depts = Data.getDepts()
+    def print_dept(self, data):
+        depts = data.getDepts()
         print(len(depts))
         availableDeptsTable = prettytable.PrettyTable(['dept', 'course'])
         for i in range(0, len(depts)):
-            courses = depts.__getitem__(i).get_Courses()
-            tempStr = "["
-            for j in range(0, len(courses) - 1):
-                tempStr += courses[j].__str__() + ", "
-            tempStr += courses[len(courses) - 1].__str__() + "]"
-            availableDeptsTable.add_row([depts.__getitem__(i).get_name(), tempStr])
+            courses = depts.__getitem__(i).getCourses()
+            if len(courses) == 0:
+                tempStr = "[ ]"
+            else:
+                tempStr = "["
+                for j in range(0, len(courses) - 1):
+                    tempStr += courses[j].__str__() + ", "
+                tempStr += courses[len(courses) - 1].__str__() + "]"
+            availableDeptsTable.add_row([depts.__getitem__(i).getName(), tempStr])
 
         print(availableDeptsTable)
 
-    def print_course(self):
+    def print_course(self, data):
         availableCoursesTable = prettytable.PrettyTable(['id', 'course #', 'max # of students', 'instructors'])
-        courses = Data.getCourses()
+        courses = data.getCourses()
         for i in range(0, len(courses)):
-            instructors = courses[i].get_instructors()
+            instructors = courses[i].getLecturer()
             tempStr = ""
             for j in range(0, len(instructors) - 1):
                 tempStr += instructors[j].__str__() + ","
             tempStr += instructors[len(instructors) - 1].__str__()
             availableCoursesTable.add_row(
-                [courses[i].get_number(), courses[i].get_name(), str(courses[i].get_maxNumbOfStudents()), tempStr])
+                [courses[i].getId(), courses[i].getName(), str(courses[i].getMaxNumberOfStudents()), tempStr])
         print(availableCoursesTable)
 
-    def print_instructor(self):
-        data = Data()
-        availableInstructorsTable = prettytable.PrettyTable(['id', 'instructors'])
+    def print_instructor(self, data):
+        # data = Data()
+        availableInstructorsTable = prettytable.PrettyTable(['id', 'Lecturer'])
         instructors = data.getLecturers()
         for i in range(0, len(instructors)):
-            availableInstructorsTable.add_row([instructors[i].get_id(), instructors[i].get_name()])
+            availableInstructorsTable.add_row([instructors[i].getId(), instructors[i].getName()])
 
         print(availableInstructorsTable)
 
-    def print_halls(self):
+    def print_halls(self, data):
         availableRoomsTable = prettytable.PrettyTable(['room #', 'max seating capacity'])
-        rooms = Data.getHalls()
+        rooms = data.getHalls()
         for i in range(0, len(rooms)):
-            availableRoomsTable.add_row([str(rooms[i].get_number()), str(rooms[i].get_seatingCapacity())])
+            availableRoomsTable.add_row([str(rooms[i].getId()), str(rooms[i].getCapacity())])
         print(availableRoomsTable)
 
-    def print_Time_Avilable(self):
+    def print_Time_Avilable(self, data):
         availableTimeAvilableTable = prettytable.PrettyTable(['id', 'Time Avilable'])
-        timeAvilable = Data.getTimeAvailable()
+        timeAvilable = data.getTimeAvailable()
         for i in range(0, len(timeAvilable)):
-            availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time()])
+            availableTimeAvilableTable.add_row([timeAvilable[i].getId(), timeAvilable[i].getTimeAvailable()])
         print(availableTimeAvilableTable)
 
     def print_generation(self, population):
