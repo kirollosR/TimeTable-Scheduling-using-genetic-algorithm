@@ -130,10 +130,10 @@ class Display:
             ['', '8:00-10:00', '10:00-12:00', '12:00-2:00', '2:00-4:00', '4:00-6:00'])
         table.add_row(
             ['\nSunday', dictClasses.get("11").getCourse().getName() + "\n" + dictClasses.get("11").getLecturer().getName() + "\n" + dictClasses.get("11").getHall().getId(),
-                        dictClasses.get("12").getCourse().getName() + "\n" + dictClasses.get("12").getLecturer().getName() + "\n" + dictClasses.get("12").getHall().getId(),
-                        dictClasses.get("13").getCourse().getName() + "\n" + dictClasses.get("13").getLecturer().getName() + "\n" + dictClasses.get("13").getHall().getId(),
-                        dictClasses.get("14").getCourse().getName() + "\n" + dictClasses.get("14").getLecturer().getName() + "\n" + dictClasses.get("14").getHall().getId(),
-                        dictClasses.get("15").getCourse().getName() + "\n" + dictClasses.get("15").getLecturer().getName() + "\n" + dictClasses.get("15").getHall().getId()])
+             dictClasses.get("12").getCourse().getName() + "\n" + dictClasses.get("12").getLecturer().getName() + "\n" + dictClasses.get("12").getHall().getId(),
+             dictClasses.get("13").getCourse().getName() + "\n" + dictClasses.get("13").getLecturer().getName() + "\n" + dictClasses.get("13").getHall().getId(),
+             dictClasses.get("14").getCourse().getName() + "\n" + dictClasses.get("14").getLecturer().getName() + "\n" + dictClasses.get("14").getHall().getId(),
+             dictClasses.get("15").getCourse().getName() + "\n" + dictClasses.get("15").getLecturer().getName() + "\n" + dictClasses.get("15").getHall().getId()])
         table.add_row([9 * '-', 19 * '-', 19 * '-', 19 * '-', 19 * '-', 19 * '-'])
 
         table.add_row(
@@ -166,38 +166,5 @@ class Display:
              dictClasses.get("53").getCourse().getName() + "\n" + dictClasses.get("53").getLecturer().getName() + "\n" + dictClasses.get("53").getHall().getId(),
              dictClasses.get("54").getCourse().getName() + "\n" + dictClasses.get("54").getLecturer().getName() + "\n" + dictClasses.get("54").getHall().getId(),
              dictClasses.get("55").getCourse().getName() + "\n" + dictClasses.get("55").getLecturer().getName() + "\n" + dictClasses.get("55").getHall().getId()])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # table.add_row(
-        #     ['Monday', dictClasses.get("21").getCourse().getName(), dictClasses.get("22").getCourse().getName(),
-        #     dictClasses.get("23").getCourse().getName(), dictClasses.get("24").getCourse().getName(),
-        #     dictClasses.get("25").getCourse().getName()])
-        # table.add_row(['---------', '----------', '----------', '----------', '----------', '----------'])
-        # table.add_row(
-        #     ['Tuesday', dictClasses.get("31").getCourse().getName(), dictClasses.get("32").getCourse().getName(),
-        #      dictClasses.get("33").getCourse().getName(), dictClasses.get("34").getCourse().getName(),
-        #      dictClasses.get("35").getCourse().getName()])
-        # table.add_row(['---------', '----------', '----------', '----------', '----------', '----------'])
-        # table.add_row(
-        #     ['Wednesday', dictClasses.get("41").getCourse().getName(), dictClasses.get("42").getCourse().getName(),
-        #      dictClasses.get("43").getCourse().getName(), dictClasses.get("44").getCourse().getName(),
-        #      dictClasses.get("45").getCourse().getName()])
-        # table.add_row(['---------', '----------', '----------', '----------', '----------', '----------'])
-        # table.add_row(
-        #     ['Thursday', dictClasses.get("51").getCourse().getName(), dictClasses.get("52").getCourse().getName(),
-        #      dictClasses.get("53").getCourse().getName(), dictClasses.get("54").getCourse().getName(),
-        #      dictClasses.get("55").getCourse().getName()])
 
         print(table)

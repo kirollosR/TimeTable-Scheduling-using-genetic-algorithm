@@ -46,25 +46,34 @@ class Schedule:
         self.numberOfConflicts = 0
         timeIds = {}
         departments = self.data.getDepts()
+        days = []
+        courseIds = {}
         # Create dictionary of departments without times
         for i in range(0, len(departments)):
             timeIds[departments[i].getName()] = []
+
         classes = self.getClasses()
         for i in range(0, len(classes)):
-            # timeIds.append(classes[i].getTimeAvilable().getId())
+            # add timeID to dictionary in the list of the course department to calculate the number of gaps of department
             timeIds[classes[i].getDept().getName()] += [int(classes[i].getTimeAvilable().getId())]
+            timeIds.setdefault(classes[i].getDept().getName(), []).append(int(classes[i].getTimeAvilable().getId()))
+            courseIds.setdefault(classes[i].getCourse().getName(), []).append(classes[i].getCourse().getName())
+
+            if classes[i].getTimeAvilable().getDay() not in days:
+                days.append(classes[i].getTimeAvilable().getDay())
+
             # capacity of hall < number of students
             if classes[i].getHall().getCapacity() < classes[i].getCourse().getMaxNumberOfStudents():
-                self.numberOfConflicts += 5  # 5 points for the students over the capacity of the hall
+                self.numberOfConflicts += 15  # 5 points for the students over the capacity of the hall
 
             # TODO: number of days the dr will teach per week
 
             for j in range(i, len(classes)):
                 # 2 classes in the same department
                 if classes[i].getDept().getName() == classes[j].getDept().getName():
-                    # 2 classes at the same time
+                    # 2 classes at the same time of same department
                     if classes[i].getTimeAvilable().getId() == classes[j].getTimeAvilable().getId() and i != j:
-                        self.numberOfConflicts += 1
+                        self.numberOfConflicts += 5
                         # 2 classes at the same time in the same hall
                         if classes[i].getHall().getId() == classes[j].getHall().getId():
                             self.numberOfConflicts += 5
@@ -82,23 +91,27 @@ class Schedule:
                             self.numberOfConflicts += 5
 
         # number of gaps of the day
-        # TODO: We have a problem that this function calculate number of gaps of all depts
-        # sortedTimeIds = sorted(timeIds)
-        # for i in range(0, len(sortedTimeIds)):
-        #     for j in range(i, 3):
-        #         gaps = int(sortedTimeIds[i+1]) - int(sortedTimeIds[i])
-        #         if 2 <= gaps <= 4:
-        #             self.numberOfConflicts += gaps - 1
-        #             break
-
         for i in timeIds.keys():
             sortedTimeIds = sorted(timeIds[i])
             for j in range(0, len(sortedTimeIds)):
-                for k in range(j, 3):
-                    gaps = int(sortedTimeIds[j]) - int(sortedTimeIds[j - 1])
+                for k in range(j, len(sortedTimeIds)):
+                    gaps = int(sortedTimeIds[k]) - int(sortedTimeIds[j])
                     if 2 <= gaps <= 4:
                         self.numberOfConflicts += (gaps - 1)
                         break
+
+        # for i in courseIds.keys():
+        #     if len(courseIds[i]) <= 15:
+        #         if len(days) == 5:
+        #             self.numberOfConflicts += 2
+        #         elif len(days) == 4:
+        #             self.numberOfConflicts += 1
+        #     elif 15 < len(courseIds[i]) <= 20:
+        #         if len(days) == 5:
+        #             self.numberOfConflicts += 1
+        #     elif len(courseIds[i]) > 20:
+        #         pass
+
         return (1 / ((1.0 * self.numberOfConflicts) + 1))
 
     def getFitness(self):

@@ -29,18 +29,24 @@ class InputData:
         elif selectionMainMenu == '2':
             # print("Enter number of data")
             # numberOfCourses = input("Enter number of courses: ")
-            numberOfCoursesOfIT = input("Enter number of courses of IT: ")
-            numberOfCoursesOfIS = input("Enter number of courses of IS: ")
-            numberOfCoursesOfCS = input("Enter number of courses of CS: ")
-            numberOfCoursesOfGeneral = input("Enter number of courses of General: ")
-            numberOfCoursesOfAI = input("Enter number of courses of AI: ")
+            numberOfCoursesOfIT = input("Enter number of courses of IT MAX (25): ")
+            numberOfCoursesOfIS = input("Enter number of courses of IS MAX (25): ")
+            numberOfCoursesOfCS = input("Enter number of courses of CS MAX (25): ")
+            numberOfCoursesOfGeneral = input("Enter number of courses of General MAX (25): ")
+            numberOfCoursesOfAI = input("Enter number of courses of AI MAX (25): ")
 
-            numberOfCourses = int(numberOfCoursesOfIS) + int(numberOfCoursesOfCS) + int(numberOfCoursesOfIT) + int(numberOfCoursesOfAI) + int(numberOfCoursesOfGeneral)
-            numberOfCoursesList = [int(numberOfCoursesOfIT), int(numberOfCoursesOfIS), int(numberOfCoursesOfCS), int(numberOfCoursesOfGeneral), int(numberOfCoursesOfAI)]
+            if int(numberOfCoursesOfIT) > 25 or int(numberOfCoursesOfIS) > 25 or int(numberOfCoursesOfCS) > 25 or int(
+                    numberOfCoursesOfGeneral) > 25 or int(numberOfCoursesOfAI) > 25:
+                print("Error: Number of courses of a department is more than 25")
+                exit(0)
 
-            numberOfLecturers = input("Enter number of lecturers: ")
-            numberOfHalls = input("Enter number of halls: ")
-            data = DataWithIds(int(numberOfCourses), int(numberOfLecturers), int(numberOfHalls), numberOfCoursesList)
+            else:
+                numberOfCourses = int(numberOfCoursesOfIS) + int(numberOfCoursesOfCS) + int(numberOfCoursesOfIT) + int(numberOfCoursesOfAI) + int(numberOfCoursesOfGeneral)
+                numberOfCoursesList = [int(numberOfCoursesOfIT), int(numberOfCoursesOfIS), int(numberOfCoursesOfCS), int(numberOfCoursesOfGeneral), int(numberOfCoursesOfAI)]
+
+                numberOfLecturers = input("Enter number of lecturers: ")
+                numberOfHalls = input("Enter number of halls: ")
+                data = DataWithIds(int(numberOfCourses), int(numberOfLecturers), int(numberOfHalls), numberOfCoursesList)
         elif selectionMainMenu == '3':
             dataMenu = {}
             dataMenu['1'] = "Enter halls"
