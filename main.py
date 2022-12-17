@@ -5,7 +5,7 @@ from InputData import InputData
 from Population import Population
 
 POPULATION_SIZE = 10
-retain = 0.2
+retain = 0.3
 random_select = 0.05
 mutate = 0.1
 
@@ -33,16 +33,33 @@ display.print_generation(population)
 
 genetic = GeneticAlgorithm(data, POPULATION_SIZE)
 
-# for i in range(200):
-while (population.getSchedules()[0].getFitness() < 0.6):
-    generationNumber += 1
-    print("\n> Generation # " + str(generationNumber))
-    population = genetic.evolve(population, retain, random_select, mutate)
-    population.getSchedules().sort(key=get_sort_key, reverse=True)
-    display.print_generation(population)
+i = 0
+while (population.getSchedules()[0].getFitness() != 1.0):
+    if i != 500:
+        generationNumber += 1
+        print("\n> Generation # " + str(generationNumber))
+        population = genetic.evolve(population, retain, random_select, mutate)
+        population.getSchedules().sort(key=get_sort_key, reverse=True)
+        display.print_generation(population)
+        i += 1
+    else:
+        break
 
+print("\n> Final Schedules")
 print("\n\n")
 display.print_schedule_as_table(population.getSchedules()[0])
 
+print("\n> IT department Schedule:")
+display.printOurUsualSchedule(population.getSchedules()[0], "IT")
+
+print("\n> IS department Schedule:")
+display.printOurUsualSchedule(population.getSchedules()[0], "IS")
+
 print("\n> CS department Schedule:")
 display.printOurUsualSchedule(population.getSchedules()[0], "CS")
+
+print("\n> General department Schedule:")
+display.printOurUsualSchedule(population.getSchedules()[0], "General")
+
+print("\n> AI department Schedule:")
+display.printOurUsualSchedule(population.getSchedules()[0], "AI")

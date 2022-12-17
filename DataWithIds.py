@@ -36,7 +36,7 @@ class DataWithIds:
         #     self.timeAvailable.append(TimeAvailable(self.TIME_AVAILABLE[i][0], self.TIME_AVAILABLE[i][1]))
 
         # TODO: change number of students
-        course1 = Course("C1", "Image Processing", [self.lecturers[3]], 100)
+        # course1 = Course("C1", "Image Processing", [self.lecturers[3]], 100)
         for i in range(0, numberOfCourses):
             randomLecturer = random.choice(self.lecturers)
             self.courses.append(Course("C" + str(i + 1), "Course " + str(i + 1), [randomLecturer], random.randint(1000, 2500)))

@@ -2,6 +2,7 @@ from Class import Class
 from random import randint
 
 
+
 class Schedule:
     def __init__(self, data):
         self.data = data
@@ -43,10 +44,9 @@ class Schedule:
 
     def calculateFitness(self):
         self.numberOfConflicts = 0
-        # timeIds = []
-        # timeIds = {"CS": [], "IS": [], "General": [], "IT": []}
         timeIds = {}
         departments = self.data.getDepts()
+        # Create dictionary of departments without times
         for i in range(0, len(departments)):
             timeIds[departments[i].getName()] = []
         classes = self.getClasses()
@@ -62,9 +62,9 @@ class Schedule:
             for j in range(i, len(classes)):
                 # 2 classes in the same department
                 if classes[i].getDept().getName() == classes[j].getDept().getName():
-                    self.numberOfConflicts += 1
                     # 2 classes at the same time
                     if classes[i].getTimeAvilable().getId() == classes[j].getTimeAvilable().getId() and i != j:
+                        self.numberOfConflicts += 1
                         # 2 classes at the same time in the same hall
                         if classes[i].getHall().getId() == classes[j].getHall().getId():
                             self.numberOfConflicts += 5
@@ -73,12 +73,13 @@ class Schedule:
                             self.numberOfConflicts += 5
                 # 2 classes in different departments
                 else:
-                    # 2 classes at the same time in the same hall
-                    if classes[i].getHall().getId() == classes[j].getHall().getId() and i != j:
-                        self.numberOfConflicts += 5
-                    # 2 classes at the same time have the same lecturer
-                    if classes[i].getLecturer() == classes[j].getLecturer() and i != j:
-                        self.numberOfConflicts += 5
+                    if classes[i].getTimeAvilable().getId() == classes[j].getTimeAvilable().getId() and i != j:
+                        # 2 classes at the same time in the same hall
+                        if classes[i].getHall().getId() == classes[j].getHall().getId() and i != j:
+                            self.numberOfConflicts += 5
+                        # 2 classes at the same time have the same lecturer
+                        if classes[i].getLecturer() == classes[j].getLecturer() and i != j:
+                            self.numberOfConflicts += 5
 
         # number of gaps of the day
         # TODO: We have a problem that this function calculate number of gaps of all depts
@@ -96,9 +97,9 @@ class Schedule:
                 for k in range(j, 3):
                     gaps = int(sortedTimeIds[j]) - int(sortedTimeIds[j - 1])
                     if 2 <= gaps <= 4:
-                        self.numberOfConflicts += gaps - 1
+                        self.numberOfConflicts += (gaps - 1)
                         break
-        return 1 / ((1.0 * self.numberOfConflicts) + 1)
+        return (1 / ((1.0 * self.numberOfConflicts) + 1))
 
     def getFitness(self):
         if self.isFitnesschanged:
