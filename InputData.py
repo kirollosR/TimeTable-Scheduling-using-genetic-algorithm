@@ -64,7 +64,10 @@ class InputData:
                 selectionOfData = input("\nPlease Select: ")
                 if selectionOfData == '1':
                     if len(data.getHalls()) > 0:
-                        hallIds = data.getHalls().getId()
+                        halls = data.getHalls()
+                        hallIds = []
+                        for i in range(0, len(halls)):
+                            hallIds.append(halls[i].getId())
                         hallId = input("Enter hall id: ")
                         if hallId in hallIds:
                             print("Hall id already exists")
@@ -79,7 +82,10 @@ class InputData:
                         data.addHall(hall)
                 elif selectionOfData == '2':
                     if len(data.getLecturers()) > 0:
-                        lecturerIds = data.getLecturers().getId()
+                        lecturers = data.getLecturers()
+                        lecturerIds = []
+                        for i in range(0, len(lecturers)):
+                            lecturerIds.append(lecturers[i].getId())
                         lecturerId = input("Enter lecturer id: ")
                         if lecturerId in lecturerIds:
                             print("Lecturer id already exists")
@@ -98,7 +104,10 @@ class InputData:
                         print("Please enter lecturers first")
                     else:
                         if len(data.getCourses()) > 0:
-                            courseIds = data.getCourses().getId()
+                            courses = data.getCourses()
+                            courseIds = []
+                            for i in range(0, len(courses)):
+                                courseIds.append(courses[i].getId())
                             courseId = input("Enter course id: ")
                             if courseId in courseIds:
                                 print("Course id already exists")
@@ -135,14 +144,17 @@ class InputData:
                         print("Please enter courses first")
                     else:
                         if len(data.getDepts()) > 0:
-                            departmentNames = data.getDepts().getName()
+                            depts = data.getDepts()
+                            departmentNames = []
+                            for i in range(0, len(depts)):
+                                departmentNames.append(depts[i].getName())
                             departmentName = input("Enter department name: ")
                             if departmentName in departmentNames:
                                 print("Department is already exists")
                             else:
                                 departmentCoursesTable = prettytable.PrettyTable(['number', 'Course'])
                                 for i in range(0, len(courses)):
-                                    departmentCoursesTable.add_row([i, courses[i].getName()])
+                                    departmentCoursesTable.add_row([i+1, courses[i].getName()])
                                 print(departmentCoursesTable)
                                 departmentCourses = []
                                 x = input("Choose number of course: ")

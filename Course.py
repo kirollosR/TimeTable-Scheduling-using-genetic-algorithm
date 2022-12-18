@@ -1,5 +1,5 @@
 class Course:
-    def __init__(self, id, name, lecturer, maxNumberOfStudents ):
+    def __init__(self, id, name, lecturer, maxNumberOfStudents):
         self.id = id
         self.name = name
         self.lecturer = lecturer #variable of class Lecturer

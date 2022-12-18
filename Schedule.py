@@ -18,6 +18,7 @@ class Schedule:
         for i in range(0, len(depts)):
             courses = depts[i].getCourses()
 
+
             for j in range(0, len(courses)):
                 newClass = Class(self.classNumb, depts[i], courses[j])
                 self.classNumb += 1

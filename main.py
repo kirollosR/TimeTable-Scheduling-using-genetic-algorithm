@@ -34,8 +34,8 @@ display.print_generation(population)
 genetic = GeneticAlgorithm(data, POPULATION_SIZE)
 
 i = 0
-while (population.getSchedules()[0].getFitness() != 1.0):
-    if i != 5000:
+while population.getSchedules()[0].getFitness() != 1.0:
+    if i != 500:
         generationNumber += 1
         print("\n> Generation # " + str(generationNumber))
         population = genetic.evolve(population, retain, random_select, mutate)
